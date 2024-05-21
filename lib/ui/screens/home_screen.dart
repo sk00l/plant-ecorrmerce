@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:plant_ecommerce/ui/components/custom_app_bar.dart';
+
 import 'package:plant_ecommerce/ui/components/custom_bottom_navigation_bar.dart';
 import 'package:plant_ecommerce/ui/components/plant_list_view.dart';
 import 'package:plant_ecommerce/ui/components/plant_list_view2.dart';
@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
+          surfaceTintColor: Colors.transparent,
           leading: const Icon(
             Icons.grid_view_rounded,
             size: 20,
@@ -41,18 +42,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+              child: Row(
                 children: [
                   const Text(
                     'Most Popular',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  const Spacer(),
+                  // const Spacer(),
                   TextButton(
                       onPressed: () {},
                       child: const Text(
@@ -64,33 +65,36 @@ class _HomeScreenState extends State<HomeScreen> {
                       )),
                 ],
               ),
-              const SizedBox(
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 16.0),
+              child: SizedBox(
                 height: 380,
                 child: PlantListViewer(),
               ),
-              Row(
-                children: [
-                  const Text(
-                    'My Favourite',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const Spacer(),
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'View All',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: Color.fromARGB(255, 75, 142, 75)),
-                      )),
-                ],
-              ),
-              const SizedBox(
-                child: PlantListViewer2(),
-              ),
-            ],
-          ),
+            ),
+            Row(
+              children: [
+                const Text(
+                  'My Favourite',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const Spacer(),
+                TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'View All',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Color.fromARGB(255, 75, 142, 75)),
+                    )),
+              ],
+            ),
+            const SizedBox(
+              child: PlantListViewer2(),
+            ),
+          ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
