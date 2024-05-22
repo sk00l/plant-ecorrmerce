@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 import 'package:plant_ecommerce/ui/components/custom_bottom_navigation_bar.dart';
 import 'package:plant_ecommerce/ui/components/plant_list_view.dart';
@@ -40,6 +42,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 size: 20,
               ),
             ),
+            IconButton(
+                onPressed: () {
+                  context.go('/cartPage');
+                },
+                icon: const Icon(
+                  Symbols.shopping_cart,
+                  size: 24,
+                )),
           ],
         ),
       ),

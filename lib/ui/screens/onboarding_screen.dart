@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'package:plant_ecommerce/configs/constants/constants.dart';
-import 'package:plant_ecommerce/ui/screens/login_screen.dart';
-
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
 

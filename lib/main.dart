@@ -29,25 +29,17 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
+    return MultiBlocProvider(
       providers: [
-        RepositoryProvider(
-          create: (context) => EmailSignUpRepository(),
+        BlocProvider(
+          create: (context) => SignupBloc(),
         ),
       ],
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => SignupBloc(),
-          ),
-        ],
-        child: MaterialApp.router(
-          theme: ThemeData(
-              fontFamily: 'TT Firs',
-              scaffoldBackgroundColor:
-                  const Color.fromARGB(255, 245, 245, 245)),
-          routerConfig: AppRouter.router,
-        ),
+      child: MaterialApp.router(
+        theme: ThemeData(
+            fontFamily: 'TT Firs',
+            scaffoldBackgroundColor: const Color.fromARGB(255, 245, 245, 245)),
+        routerConfig: AppRouter.router,
       ),
     );
   }
