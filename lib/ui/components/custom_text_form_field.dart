@@ -48,10 +48,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late bool _passwordVisibility;
 
   final FocusNode _focusNode = FocusNode();
-  Color _borderColor = const Color.fromARGB(255, 75, 142, 75);
+  Color _borderColor = const Color.fromARGB(255, 23, 65, 42);
   Color redError = Colors.red;
   Color primary = const Color.fromARGB(255, 75, 142, 75);
-  double _borderSize = 1;
+  double _borderSize = 0.7;
 
   @override
   void initState() {

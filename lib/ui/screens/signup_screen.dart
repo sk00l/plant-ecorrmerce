@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_svg/svg.dart';
+import 'package:plant_ecommerce/modules/auth/email%20signup/bloc/signup_bloc.dart';
+
+import 'package:plant_ecommerce/modules/auth/email%20signup/email_signup_repository.dart';
 import 'package:plant_ecommerce/ui/components/custom_text_form_field.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -10,6 +15,14 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final EmailSignUpRepository _emailSignUpRepository = EmailSignUpRepository();
+
+  final fnameController = TextEditingController();
+  final lnameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  // final SignupBloc _signupBloc = BlocProvider.of<SignupBloc>(context);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,21 +82,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               CustomTextFormField(
                 title: 'First Name',
-                // textEditingController: ,
+                textEditingController: fnameController,
               ),
               const SizedBox(
                 height: 24,
               ),
               CustomTextFormField(
                 title: 'Last Name',
-                // textEditingController: ,
+                textEditingController: lnameController,
               ),
               const SizedBox(
                 height: 24,
               ),
               CustomTextFormField(
                 title: 'Email Address',
-                // textEditingController: ,
+                textEditingController: emailController,
               ),
               const SizedBox(
                 height: 24,
@@ -91,6 +104,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               CustomTextFormField(
                 title: 'Password',
                 isSecure: true,
+                textEditingController: passwordController,
               ),
               const SizedBox(
                 height: 24,
@@ -106,19 +120,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 24,
               ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  backgroundColor: const Color.fromARGB(255, 75, 142, 75),
-                  minimumSize: const Size(double.infinity, 60),
-                ),
-                child: const Text(
-                  'Register',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
+              BlocBuilder<SignupBloc, SignupState>(
+                builder: (context, state) {
+                  return ElevatedButton(
+                    onPressed: () async {
+                      context.read<SignupBloc>().add(SignUpRequested(
+                          fname: fnameController.text,
+                          lname: lnameController.text,
+                          email: emailController.text,
+                          password: passwordController.text));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      backgroundColor: const Color.fromARGB(255, 75, 142, 75),
+                      minimumSize: const Size(double.infinity, 60),
+                    ),
+                    child: state is SignupProcess
+                        ? const CircularProgressIndicator()
+                        : const Text(
+                            'Register',
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                  );
+                },
               ),
               const SizedBox(
                 height: 20,

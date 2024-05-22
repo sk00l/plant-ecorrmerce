@@ -63,6 +63,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '256527777166',
     projectId: 'plant-ecommerce-c3a49',
     storageBucket: 'plant-ecommerce-c3a49.appspot.com',
+    androidClientId: '256527777166-953lel9n1fv9nkcabo4qva46pnpf1r3h.apps.googleusercontent.com',
+    iosClientId: '256527777166-4pig0es97e32e29rraj2bs1lg3aahbs1.apps.googleusercontent.com',
     iosBundleId: 'com.example.plantEcommerce',
   );
+
 }

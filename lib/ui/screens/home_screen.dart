@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
+          backgroundColor: const Color.fromARGB(255, 245, 245, 245),
           surfaceTintColor: Colors.transparent,
           leading: const Icon(
             Icons.grid_view_rounded,
@@ -44,16 +45,59 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Padding(
+              padding: EdgeInsets.only(left: 16),
+              child: Text(
+                'Good Morning',
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 16),
+              child: Text(
+                'Find Your Favourite Plants Here',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            ),
+            const SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+              padding: const EdgeInsets.only(left: 16.0, right: 20),
+              child: SizedBox(
+                height: 60,
+                child: TextField(
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      size: 32,
+                    ),
+                    labelText: "Search",
+                    labelStyle:
+                        const TextStyle(color: Colors.grey, fontSize: 16.0),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
               child: Row(
                 children: [
                   const Text(
                     'Most Popular',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  // const Spacer(),
+                  const Spacer(),
                   TextButton(
                       onPressed: () {},
                       child: const Text(
@@ -73,26 +117,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: PlantListViewer(),
               ),
             ),
-            Row(
-              children: [
-                const Text(
-                  'My Favourite',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                const Spacer(),
-                TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'View All',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: Color.fromARGB(255, 75, 142, 75)),
-                    )),
-              ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+              child: Row(
+                children: [
+                  const Text(
+                    'My Favourite',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const Spacer(),
+                  TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'View All',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Color.fromARGB(255, 75, 142, 75)),
+                      )),
+                ],
+              ),
             ),
-            const SizedBox(
-              child: PlantListViewer2(),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+              child: SizedBox(
+                child: PlantListViewer2(),
+              ),
             ),
           ],
         ),

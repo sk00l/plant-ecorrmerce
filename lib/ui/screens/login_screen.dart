@@ -1,6 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:plant_ecommerce/modules/auth/google%20auth/repository/google_sign_in_repository.dart';
 import 'package:plant_ecommerce/ui/components/custom_text_form_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -11,6 +13,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final GoogleSignInRepository _googleSignInRepository =
+      GoogleSignInRepository();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +36,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 20,
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 24,
               ),
               const Text(
                 'Welcome Back',
@@ -79,17 +86,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: 'Password',
                 isSecure: true,
               ),
-              TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(alignment: Alignment.centerRight),
-                child: const Text(
-                  'Forgot Password ?',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Color.fromARGB(255, 75, 142, 75),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {},
+                    style:
+                        TextButton.styleFrom(alignment: Alignment.centerRight),
+                    child: const Text(
+                      'Forgot Password ?',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Color.fromARGB(255, 75, 142, 75),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
               const SizedBox(
                 height: 24,
@@ -133,7 +146,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         'assets/vectors/google.svg',
                         height: 24,
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        await _googleSignInRepository.signInWithGoogle();
+                      },
                       style: OutlinedButton.styleFrom(
                         side: const BorderSide(width: 0.5, color: Colors.grey),
                         shape: RoundedRectangleBorder(
@@ -183,18 +198,22 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Center(
                 child: RichText(
-                  text: const TextSpan(
+                  text: TextSpan(
                     text: "Didn't have an account?",
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: Colors.black),
                     children: <TextSpan>[
                       TextSpan(
                         text: ' Register',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color.fromARGB(255, 75, 142, 75),
                         ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            context.go('/login/signup');
+                          },
                       )
                     ],
                   ),

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:plant_ecommerce/configs/constants/constants.dart';
@@ -19,7 +20,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 242, 247, 242),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
@@ -34,7 +35,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               CreatePage(
                 image: 'assets/images/p1.png',
                 title1: 'Best collection of',
-                titleWithColor: 'indoor & outdoor',
+                titleWithColor: ' indoor & outdoor',
                 title2: 'plants',
                 description:
                     'Adipisicing eiusmod sit elit laborum sunt culpa qui labore.',
@@ -42,42 +43,57 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               CreatePage(
                 image: 'assets/images/p2.png',
                 title1: 'Keep your',
-                titleWithColor: 'plants alive',
+                title2: 'plants',
+                titleWithColor: ' alive',
                 description:
                     'Ex in nisi culpa nostrud proident dolor consectetur commodo labore amet consequat dolor proident veniam.',
               ),
               CreatePage(
                 image: 'assets/images/p3.png',
                 title1: "Plan a tree &",
-                titleWithColor: 'save the planet',
+                title2: "green the",
+                titleWithColor: ' earth',
                 description: 'Eiusmod laboris non elit sint elit aliqua.',
               ),
             ],
           ),
           Positioned(
-              bottom: 120,
-              left: 173,
-              child: SmoothPageIndicator(
-                controller: _pageController,
-                count: 3,
-                effect: const JumpingDotEffect(
-                    dotHeight: 10,
-                    dotWidth: 10,
-                    verticalOffset: 10,
-                    activeDotColor: Color(0xff296e48)),
-              )),
+            bottom: 180,
+            left: 193,
+            child: SmoothPageIndicator(
+              controller: _pageController,
+              count: 3,
+              effect: const JumpingDotEffect(
+                dotHeight: 3,
+                dotWidth: 3,
+                verticalOffset: 10,
+                activeDotColor: Color(0xff296e48),
+              ),
+            ),
+          ),
           Positioned(
             bottom: 60,
+            left: 30,
             right: 30,
-            child: Container(
-              padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Constants.primaryColor,
-              ),
-              child: IconButton(
-                  onPressed: () {
-                    setState(() {
+            child: currentIndex == 2
+                ? ElevatedButton(
+                    onPressed: () {
+                      context.go('/login');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      backgroundColor: const Color.fromARGB(255, 75, 142, 75),
+                      minimumSize: const Size(double.infinity, 60),
+                    ),
+                    child: const Text(
+                      'Get Started',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  )
+                : ElevatedButton(
+                    onPressed: () {
                       if (currentIndex < 2) {
                         currentIndex++;
                         if (currentIndex < 3) {
@@ -86,20 +102,39 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               curve: Curves.easeIn);
                         }
                       } else {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const LoginScreen()));
+                        context.go('/login');
                       }
-                    });
-                  },
-                  icon: const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 24,
-                    color: Colors.white,
-                  )),
-            ),
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      backgroundColor: const Color.fromARGB(255, 75, 142, 75),
+                      minimumSize: const Size(double.infinity, 60),
+                    ),
+                    child: const Text(
+                      'Next',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ),
           ),
+          Positioned(
+            top: 50,
+            right: 20,
+            child: TextButton(
+              onPressed: () {
+                context.go('/login');
+              },
+              child: const Text(
+                'Skip',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -137,29 +172,31 @@ class CreatePage extends StatelessWidget {
             height: 20,
           ),
           Center(
-            child: RichText(
-              text: TextSpan(
-                text: title1,
-                style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: titleWithColor,
-                    style: const TextStyle(
-                        color: Color.fromARGB(255, 75, 142, 75)),
-                  ),
-                  TextSpan(
-                    text: title2,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                    ),
-                  )
-                ],
+            child: Text(
+              title1,
+              style: const TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
+            ),
+          ),
+          RichText(
+            text: TextSpan(
+              text: title2,
+              style: const TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: titleWithColor,
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 75, 142, 75),
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(
@@ -169,9 +206,9 @@ class CreatePage extends StatelessWidget {
             description,
             textAlign: TextAlign.center,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: FontWeight.w400,
-              color: Colors.grey,
+              color: Colors.black,
             ),
           ),
           const SizedBox(
