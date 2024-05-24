@@ -15,6 +15,7 @@ class _PlantListViewer2State extends State<PlantListViewer2> {
       height: 300,
       child: ListView.builder(
         itemCount: 5,
+        physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return Container(
             height: 130,

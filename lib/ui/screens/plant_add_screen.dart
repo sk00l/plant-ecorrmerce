@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_ecommerce/models/plant_model.dart';
 import 'package:plant_ecommerce/modules/plant_add/bloc/plant_bloc.dart';
+import 'package:plant_ecommerce/modules/plant_add/repository/plant_add_repository.dart';
+import 'package:uuid/uuid.dart';
 
 class PlantAddScreen extends StatefulWidget {
   const PlantAddScreen({super.key});
@@ -100,7 +102,7 @@ class _PlantAddScreenState extends State<PlantAddScreen> {
                           height: heightController.text,
                           humidity: humudityController.text,
                           price: priceController.text,
-                          uuid: '',
+                          uuid: uuid.v4(),
                           imageUrl: '',
                         ),
                       ),
@@ -108,6 +110,18 @@ class _PlantAddScreenState extends State<PlantAddScreen> {
               },
               child: const Text("Add Plant"),
             ),
+            BlocBuilder<PlantBloc, PlantState>(builder: (context, state) {
+              if (state.imageFile == null) {
+                return const SizedBox();
+              }
+              return Image.file(state.imageFile!);
+            }),
+            ElevatedButton(
+              onPressed: () {
+                context.read<PlantBloc>().add(PickImage());
+              },
+              child: const Text("Image"),
+            )
           ],
         ),
       ),

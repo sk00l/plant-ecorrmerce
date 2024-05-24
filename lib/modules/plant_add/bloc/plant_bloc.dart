@@ -1,7 +1,9 @@
-import 'package:bloc/bloc.dart';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:plant_ecommerce/configs/locator/service_locator.dart';
 import 'package:plant_ecommerce/models/plant_model.dart';
 import 'package:plant_ecommerce/modules/plant_add/repository/plant_add_repository.dart';
@@ -14,6 +16,8 @@ class PlantBloc extends Bloc<PlantEvent, PlantState> {
     on<AddPlantEvent>((event, emit) async {
       try {
         emit(state.copyWith(error: null));
+        var imageURL = await plantAddRepositorty.uploadImage(state.imageFile!);
+        event.plantModel = event.plantModel.copyWith(imageUrl: imageURL);
 
         await plantAddRepositorty.addPlant(event.plantModel);
         emit(state.copyWith(plantStateEnum: PlantStateEnum.success));
@@ -66,6 +70,20 @@ class PlantBloc extends Bloc<PlantEvent, PlantState> {
         await plantAddRepositorty.deleteEvent(event.uuid);
 
         // add(GetEvent());
+      } catch (e) {
+        emit(state.copyWith(
+            plantStateEnum: PlantStateEnum.filure, error: e.toString()));
+      }
+    });
+
+    on<PickImage>((event, emit) async {
+      try {
+        emit(state.copyWith(plantStateEnum: PlantStateEnum.imagePicking));
+        var res = await plantAddRepositorty.getFileFromPicker();
+        emit(state.copyWith(
+          plantStateEnum: PlantStateEnum.imagePicked,
+          imageFile: res,
+        ));
       } catch (e) {
         emit(state.copyWith(
             plantStateEnum: PlantStateEnum.filure, error: e.toString()));

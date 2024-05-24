@@ -47,7 +47,7 @@ class _CartScreenState extends State<CartScreen> {
                             .add(GetPlantEvent());
                       },
                       child: ListView.builder(
-                        itemCount: 5,
+                        itemCount: state.plantModelList!.length,
                         itemBuilder: (context, index) {
                           return Container(
                             height: 130,

@@ -18,8 +18,8 @@ class PlantAddRepositorty {
 
   Future<void> addPlant(PlantModel plantModel) async {
     CollectionReference collectionReference = _firestore.collection('plants');
-    plantModel = plantModel.copyWith(imageUrl: await uploadImage());
-    await collectionReference.doc(uuid.v4()).set(plantModel.toMap());
+    // plantModel = plantModel.copyWith(imageUrl: await uploadImage());
+    await collectionReference.doc(plantModel.uuid).set(plantModel.toMap());
   }
 
   Future<List<PlantModel>?> getPlants() async {
@@ -51,10 +51,12 @@ class PlantAddRepositorty {
     });
   }
 
-  Future<String> uploadImage() async {
-    Reference ref = _storage.ref('plants').child('plant_images');
+  Future<String> uploadImage(File imageFile) async {
+    Reference ref = _storage
+        .ref('plants')
+        .child('plant_images/${imageFile.path.split('/').last}');
 
-    var res = await ref.putFile(await getFileFromPicker());
+    var res = await ref.putFile(imageFile);
     var url = await res.ref.getDownloadURL();
     return url;
   }
@@ -65,15 +67,8 @@ class PlantAddRepositorty {
       throw Exception('No image selected');
     }
 
-    final tempDir = await getTemporaryDirectory();
-
-    var file =
-        File('${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}.png');
-
     File imageFile = File(pickedImage.files.single.path!);
 
-    await file.writeAsBytes(await imageFile.readAsBytes());
-
-    return file;
+    return imageFile;
   }
 }

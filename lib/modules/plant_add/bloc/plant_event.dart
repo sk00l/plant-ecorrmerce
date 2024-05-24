@@ -3,7 +3,7 @@ part of 'plant_bloc.dart';
 abstract class PlantEvent {}
 
 class AddPlantEvent extends PlantEvent {
-  final PlantModel plantModel;
+  PlantModel plantModel;
   AddPlantEvent({required this.plantModel});
 }
 
@@ -18,3 +18,5 @@ class DeletePlantById extends PlantEvent {
   final String uuid;
   DeletePlantById({required this.uuid});
 }
+
+class PickImage extends PlantEvent {}
