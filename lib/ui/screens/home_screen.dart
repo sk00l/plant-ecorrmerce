@@ -53,109 +53,115 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 16),
-              child: Text(
-                'Good Morning',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 16),
-              child: Text(
-                'Find Your Favourite Plants Here',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 20),
-              child: SizedBox(
-                height: 60,
-                child: TextField(
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      size: 32,
-                    ),
-                    labelText: "Search",
-                    labelStyle:
-                        const TextStyle(color: Colors.grey, fontSize: 16.0),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 16),
+                  child: Text(
+                    'Good Morning',
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                 ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-              child: Row(
-                children: [
-                  const Text(
-                    'Most Popular',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                const Padding(
+                  padding: EdgeInsets.only(left: 16),
+                  child: Text(
+                    'Find Your Favourite Plants Here',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
-                  const Spacer(),
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'View All',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: Color.fromARGB(255, 75, 142, 75)),
-                      )),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 16.0),
-              child: SizedBox(
-                height: 380,
-                child: PlantListViewer(),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-              child: Row(
-                children: [
-                  const Text(
-                    'My Favourite',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0, right: 20),
+                  child: SizedBox(
+                    height: 60,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          size: 32,
+                        ),
+                        labelText: "Search",
+                        labelStyle:
+                            const TextStyle(color: Colors.grey, fontSize: 16.0),
+                      ),
+                    ),
                   ),
-                  const Spacer(),
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'View All',
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                  child: Row(
+                    children: [
+                      const Text(
+                        'Most Popular',
                         style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: Color.fromARGB(255, 75, 142, 75)),
-                      )),
-                ],
-              ),
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      const Spacer(),
+                      TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'View All',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: Color.fromARGB(255, 75, 142, 75)),
+                          )),
+                    ],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 16.0),
+                  child: SizedBox(
+                    height: 380,
+                    child: PlantListViewer(),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                  child: Row(
+                    children: [
+                      const Text(
+                        'My Favourite',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      const Spacer(),
+                      TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'View All',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: Color.fromARGB(255, 75, 142, 75)),
+                          )),
+                    ],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                  child: SizedBox(
+                    child: PlantListViewer2(),
+                  ),
+                ),
+              ],
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-              child: SizedBox(
-                child: PlantListViewer2(),
-              ),
-            ),
-          ],
-        ),
+          )
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: SizedBox(
@@ -163,7 +169,9 @@ class _HomeScreenState extends State<HomeScreen> {
         width: 80,
         child: FloatingActionButton(
           backgroundColor: const Color.fromARGB(255, 75, 142, 75),
-          onPressed: () {},
+          onPressed: () {
+            context.go('/plantAddPage');
+          },
           shape: const CircleBorder(),
           child: SvgPicture.asset(
             'assets/vectors/qr-scan.svg',

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plant_ecommerce/modules/auth/email%20signup/bloc/signup_bloc.dart';
 
-import 'package:plant_ecommerce/modules/auth/email%20signup/email_signup_repository.dart';
+import 'package:plant_ecommerce/modules/auth/email%20signup/repository/email_signup_repository.dart';
 import 'package:plant_ecommerce/ui/components/custom_text_form_field.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -20,7 +20,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  // final SignupBloc _signupBloc = BlocProvider.of<SignupBloc>(context);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

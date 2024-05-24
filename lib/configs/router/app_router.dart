@@ -5,13 +5,14 @@ import 'package:plant_ecommerce/ui/screens/details_screen.dart';
 import 'package:plant_ecommerce/ui/screens/home_screen.dart';
 import 'package:plant_ecommerce/ui/screens/login_screen.dart';
 import 'package:plant_ecommerce/ui/screens/onboarding_screen.dart';
+import 'package:plant_ecommerce/ui/screens/plant_add_screen.dart';
 import 'package:plant_ecommerce/ui/screens/signup_screen.dart';
 
 class AppRouter {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   static GoRouter router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: '/onboard',
+    initialLocation: '/',
     routes: <RouteBase>[
       GoRoute(
         path: '/',
@@ -24,6 +25,10 @@ class AppRouter {
           GoRoute(
             path: 'cartPage',
             builder: (context, state) => const CartScreen(),
+          ),
+          GoRoute(
+            path: 'plantAddPage',
+            builder: (context, state) => const PlantAddScreen(),
           )
         ],
       ),
