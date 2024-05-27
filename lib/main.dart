@@ -4,8 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_ecommerce/configs/locator/service_locator.dart';
 import 'package:plant_ecommerce/configs/router/app_router.dart';
 import 'package:plant_ecommerce/firebase_options.dart';
+import 'package:plant_ecommerce/modules/auth/email%20login/bloc/login_bloc.dart';
 import 'package:plant_ecommerce/modules/auth/email%20signup/bloc/signup_bloc.dart';
-import 'package:plant_ecommerce/modules/auth/email%20signup/repository/email_signup_repository.dart';
+
 import 'package:plant_ecommerce/modules/plant_add/bloc/plant_bloc.dart';
 
 Future<void> main() async {
@@ -36,7 +37,16 @@ class MainApp extends StatelessWidget {
           create: (context) => SignupBloc(),
         ),
         BlocProvider(
-          create: (context) => PlantBloc()..add(GetPlantEvent()),
+          create: (context) => PlantBloc()
+            ..add(
+              GetPlantEvent(),
+            ),
+        ),
+        BlocProvider(
+          create: (context) => LoginBloc()
+            ..add(
+              AutoLoginRequested(),
+            ),
         )
       ],
       child: MaterialApp.router(

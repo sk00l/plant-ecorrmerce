@@ -8,7 +8,7 @@ class PlantModel {
   final String type;
   final String height;
   final String humidity;
-  final String price;
+  final int price;
   final String uuid;
   final String imageUrl;
   PlantModel({
@@ -30,7 +30,7 @@ class PlantModel {
     String? type,
     String? height,
     String? humidity,
-    String? price,
+    int? price,
     String? uuid,
     String? imageUrl,
   }) {
@@ -69,7 +69,7 @@ class PlantModel {
       type: map['type'] as String,
       height: map['height'] as String,
       humidity: map['humidity'] as String,
-      price: map['price'] as String,
+      price: map['price'] as int,
       uuid: map['uuid'] as String,
       imageUrl: map['imageUrl'] as String,
     );

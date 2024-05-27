@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_ecommerce/models/plant_model.dart';
 import 'package:plant_ecommerce/modules/plant_add/bloc/plant_bloc.dart';
 import 'package:plant_ecommerce/modules/plant_add/repository/plant_add_repository.dart';
-import 'package:uuid/uuid.dart';
 
 class PlantAddScreen extends StatefulWidget {
   const PlantAddScreen({super.key});
@@ -101,7 +100,7 @@ class _PlantAddScreenState extends State<PlantAddScreen> {
                           type: plantTypeController.text,
                           height: heightController.text,
                           humidity: humudityController.text,
-                          price: priceController.text,
+                          price: int.parse(priceController.text),
                           uuid: uuid.v4(),
                           imageUrl: '',
                         ),

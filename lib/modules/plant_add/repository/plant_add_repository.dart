@@ -1,14 +1,10 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
-
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
-
 import 'package:plant_ecommerce/models/plant_model.dart';
 import 'package:uuid/uuid.dart';
-import 'dart:io';
-import 'dart:developer';
 
 var uuid = const Uuid();
 

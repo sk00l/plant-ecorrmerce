@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_svg/svg.dart';
 import 'package:plant_ecommerce/modules/auth/email%20signup/bloc/signup_bloc.dart';
-
-import 'package:plant_ecommerce/modules/auth/email%20signup/repository/email_signup_repository.dart';
 import 'package:plant_ecommerce/ui/components/custom_text_form_field.dart';
 
 class SignUpScreen extends StatefulWidget {
