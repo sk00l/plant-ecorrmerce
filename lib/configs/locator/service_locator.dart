@@ -1,11 +1,18 @@
 import 'package:get_it/get_it.dart';
+import 'package:plant_ecommerce/data/app_preference.dart';
 import 'package:plant_ecommerce/modules/auth/email%20login/repository/email_login_repository.dart';
 import 'package:plant_ecommerce/modules/auth/email%20signup/repository/email_signup_repository.dart';
 import 'package:plant_ecommerce/modules/plant_add/repository/plant_add_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
 
-void setup() {
+void setup() async {
+  getIt.registerSingletonAsync<SharedPreferences>(
+      () => SharedPreferences.getInstance());
+  await Future.delayed(const Duration(milliseconds: 200));
+
+  getIt.registerSingleton<AppPreference>(AppPreference());
   getIt.registerLazySingleton<EmailSignUpRepository>(
       () => EmailSignUpRepository());
 

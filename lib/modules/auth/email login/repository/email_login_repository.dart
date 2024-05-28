@@ -1,17 +1,14 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:plant_ecommerce/configs/locator/service_locator.dart';
+import 'package:plant_ecommerce/data/app_preference.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EmailLoginRepository {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  // ignore: non_constant_identifier_names
-  EmailLoginRepository() {
-    _getSharedPreferenceInstance();
-  }
-
-  SharedPreferences? pref;
+  AppPreference? pref = getIt.get<AppPreference>();
 
   Future<void> _getSharedPreferenceInstance() async {
     pref = await SharedPreferences.getInstance();
@@ -25,8 +22,7 @@ class EmailLoginRepository {
       UserCredential userCredential = await firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
 
-      await pref?.setString('email', 'email');
-      await pref?.setString('password', 'password');
+pref.saveUser(email, passworfd);
 
       return userCredential;
     } catch (e) {

@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
-        if (state is LoginSuccess) {
+        if (state is LoginAuthenticationSuccess) {
           context.go('/');
         } else if (state is LoginFailed) {
           ScaffoldMessenger.of(context).showSnackBar(

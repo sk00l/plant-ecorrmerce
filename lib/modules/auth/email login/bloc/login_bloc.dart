@@ -24,7 +24,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<AutoLoginRequested>((event, emit) async {
       emit(LoggingIn());
 
-      await Future.delayed(const Duration(seconds: 2));
+      // await Future.delayed(const Duration(seconds: 2));
 
       try {
         final userCredential = await emailLoginRepository.autoLogin();
