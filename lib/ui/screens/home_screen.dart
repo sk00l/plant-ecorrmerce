@@ -4,7 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:plant_ecommerce/configs/locator/service_locator.dart';
 import 'package:plant_ecommerce/modules/auth/email%20login/bloc/login_bloc.dart';
+import 'package:plant_ecommerce/modules/auth/email%20login/repository/email_login_repository.dart';
 
 import 'package:plant_ecommerce/ui/components/custom_bottom_navigation_bar.dart';
 import 'package:plant_ecommerce/ui/components/plant_list_view.dart';
@@ -30,6 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: AppBar(
+            title: Text(
+              getIt.get<EmailLoginRepository>().pref?.getString('email') ??
+                  'ababbdwad',
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             backgroundColor: const Color.fromARGB(255, 245, 245, 245),
             surfaceTintColor: Colors.transparent,
             leading: const Icon(

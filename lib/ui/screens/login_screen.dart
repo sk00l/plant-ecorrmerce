@@ -59,20 +59,6 @@ class _LoginScreenState extends State<LoginScreen> {
             }
           },
         ),
-        BlocListener<LoginBloc, LoginState>(
-          listener: (context, state) {
-            if (state is LoginSuccess) {
-              context.go('/');
-            } else if (state is LoginFailed) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.loginFailedMessage),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            }
-          },
-        ),
       ],
       child: Scaffold(
         body: StreamBuilder<User?>(

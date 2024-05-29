@@ -18,16 +18,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } catch (e) {
         emit(const LoginFailed(loginFailedMessage: 'failed'));
       }
-
-      emit(const LoginSuccess(loginSuccessMessage: 'logged in successfully'));
-
-      // emit(const LoginFailed(loginFailedMessage: 'failed to login'));
     });
 
     on<AutoLoginRequested>((event, emit) async {
       emit(LoggingIn());
-
-      await Future.delayed(const Duration(seconds: 2));
 
       try {
         final userCredential = await emailLoginRepository.autoLogin();

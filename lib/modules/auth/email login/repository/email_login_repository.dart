@@ -32,6 +32,7 @@ class EmailLoginRepository {
     } catch (e) {
       log('errr found');
       log(e.toString());
+      rethrow;
     }
     return null;
   }
