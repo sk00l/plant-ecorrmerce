@@ -25,8 +25,8 @@ class EmailLoginRepository {
       UserCredential userCredential = await firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
 
-      await pref?.setString('email', 'email');
-      await pref?.setString('password', 'password');
+      await pref?.setString('email', email);
+      await pref?.setString('password', password);
 
       return userCredential;
     } catch (e) {

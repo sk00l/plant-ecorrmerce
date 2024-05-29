@@ -11,10 +11,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginAuthenticationRequested>((event, emit) async {
       emit(LoggingIn());
 
-      await Future.delayed(const Duration(seconds: 2));
-
-      await emailLoginRepository.signInWithEmailPassword(
-          event.email, event.password);
+      try {
+        await emailLoginRepository.signInWithEmailPassword(
+            event.email, event.password);
+        if (event.email == null && event.password == null) {
+          emit(const LoginFailed(loginFailedMessage: 'failed'));
+        } else {
+          emit(const LoginSuccess(loginSuccessMessage: 'login success'));
+        }
+      } catch (e) {
+        emit(const LoginFailed(loginFailedMessage: 'failed'));
+      }
 
       emit(const LoginSuccess(loginSuccessMessage: 'logged in successfully'));
 
@@ -40,8 +47,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     on<LogoutRequested>((event, emit) async {
       emit(LoggingOut());
-
-      await Future.delayed(const Duration(seconds: 2));
 
       await emailLoginRepository.signOut();
 

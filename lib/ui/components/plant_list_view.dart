@@ -33,7 +33,7 @@ class _PlantListViewerState extends State<PlantListViewer> {
                       padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                       child: InkWell(
                         onTap: () {
-                          context.go('/detailsScreen');
+                          context.go('/detailsScreen', extra: plant.uuid);
                         },
                         child: Container(
                           width: 260,

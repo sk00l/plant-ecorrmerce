@@ -12,7 +12,7 @@ class AppRouter {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   static GoRouter router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: '/onboard',
+    initialLocation: '/',
     routes: <RouteBase>[
       GoRoute(
         path: '/',
@@ -20,7 +20,10 @@ class AppRouter {
         routes: [
           GoRoute(
             path: 'detailsScreen',
-            builder: (context, state) => const DetailsScreen(),
+            builder: (context, state) {
+              final plantId = state.extra as String;
+              return DetailsScreen(plantId: plantId);
+            },
           ),
           GoRoute(
             path: 'cartPage',
