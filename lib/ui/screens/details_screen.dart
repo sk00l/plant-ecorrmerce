@@ -1,9 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:plant_ecommerce/models/cart_model.dart';
+import 'package:plant_ecommerce/modules/cart/bloc/cart_bloc.dart';
 import 'package:plant_ecommerce/modules/plant_add/bloc/plant_bloc.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -18,6 +21,7 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   late double _rating;
 
   @override
@@ -257,20 +261,38 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                           ],
                         ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            backgroundColor:
-                                const Color.fromARGB(255, 75, 142, 75),
-                            minimumSize: const Size(double.infinity, 60),
-                          ),
-                          child: const Text(
-                            'Add to cart',
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
+                        BlocBuilder<CartBloc, CartState>(
+                          builder: (context, state) {
+                            return ElevatedButton(
+                              onPressed: () {
+                                context.read<CartBloc>().add(AddToCartEvent(
+                                    cartModel: CartModel(
+                                        name: plant.name,
+                                        description: plant.description,
+                                        size: plant.size,
+                                        type: plant.size,
+                                        height: plant.height,
+                                        humidity: plant.humidity,
+                                        price: plant.price,
+                                        id: plant.uuid,
+                                        imageUrl: plant.imageUrl,
+                                        postedBy: '')));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                backgroundColor:
+                                    const Color.fromARGB(255, 75, 142, 75),
+                                minimumSize: const Size(double.infinity, 60),
+                              ),
+                              child: const Text(
+                                'Add to cart',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),

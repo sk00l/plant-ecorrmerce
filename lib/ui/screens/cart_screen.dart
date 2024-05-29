@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:plant_ecommerce/modules/plant_add/bloc/plant_bloc.dart';
+import 'package:plant_ecommerce/modules/cart/bloc/cart_bloc.dart';
+
+import 'package:plant_ecommerce/models/cart_model.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -11,6 +13,12 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<CartBloc>().add(GetCartById());
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -35,20 +43,21 @@ class _CartScreenState extends State<CartScreen> {
               color: Colors.black,
               height: size.height * .5,
               width: size.width,
-              child: BlocBuilder<PlantBloc, PlantState>(
+              child: BlocBuilder<CartBloc, CartState>(
                 builder: (context, state) {
-                  if (state.plantStateEnum == PlantStateEnum.loading) {
+                  if (state.cartStateEnum == CartStateEnum.loading) {
                     return const Center(child: CircularProgressIndicator());
-                  } else if (state.plantModelList != null &&
-                      state.plantModelList!.isNotEmpty) {
+                  } else if (state.cartStateEnum == CartStateEnum.success &&
+                      state.cartModelList != null &&
+                      state.cartModelList!.isNotEmpty) {
                     return RefreshIndicator(
                       onRefresh: () async {
-                        BlocProvider.of<PlantBloc>(context)
-                            .add(GetPlantEvent());
+                        context.read<CartBloc>().add(GetCartById());
                       },
                       child: ListView.builder(
-                        itemCount: state.plantModelList!.length,
+                        itemCount: state.cartModelList!.length,
                         itemBuilder: (context, index) {
+                          CartModel cartItem = state.cartModelList![index];
                           return Container(
                             height: 130,
                             margin: const EdgeInsets.only(bottom: 16),
@@ -74,12 +83,8 @@ class _CartScreenState extends State<CartScreen> {
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(8),
-                                          child: state.plantModelList![index]
-                                                      .imageUrl !=
-                                                  null
-                                              ? Image.network(state
-                                                  .plantModelList![index]
-                                                  .imageUrl)
+                                          child: cartItem.imageUrl != null
+                                              ? Image.network(cartItem.imageUrl)
                                               : const Icon(Icons
                                                   .photo_size_select_large_rounded),
                                         ),
@@ -94,21 +99,21 @@ class _CartScreenState extends State<CartScreen> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              state.plantModelList![index].name,
+                                              cartItem.name,
                                               style: const TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
                                             Text(
-                                              state.plantModelList![index].type,
+                                              cartItem.type,
                                               style: const TextStyle(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w400,
                                                   color: Colors.grey),
                                             ),
                                             Text(
-                                              "\$ ${state.plantModelList![index].price}",
+                                              "\$ ${cartItem.price}",
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18),
@@ -135,7 +140,8 @@ class _CartScreenState extends State<CartScreen> {
                         },
                       ),
                     );
-                  } else if (state.error != null) {
+                  } else if (state.cartStateEnum == CartStateEnum.filure &&
+                      state.error != null) {
                     return Center(
                       child: Text(state.error!),
                     );
@@ -143,7 +149,7 @@ class _CartScreenState extends State<CartScreen> {
                   return Center(
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        context.read<PlantBloc>().add(GetPlantEvent());
+                        context.read<CartBloc>().add(GetCartById());
                       },
                       icon: const Icon(Icons.refresh),
                       label: const Text('Refresh'),

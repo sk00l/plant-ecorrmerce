@@ -6,6 +6,7 @@ import 'package:plant_ecommerce/configs/router/app_router.dart';
 import 'package:plant_ecommerce/firebase_options.dart';
 import 'package:plant_ecommerce/modules/auth/email%20login/bloc/login_bloc.dart';
 import 'package:plant_ecommerce/modules/auth/email%20signup/bloc/signup_bloc.dart';
+import 'package:plant_ecommerce/modules/cart/bloc/cart_bloc.dart';
 
 import 'package:plant_ecommerce/modules/plant_add/bloc/plant_bloc.dart';
 
@@ -47,6 +48,9 @@ class MainApp extends StatelessWidget {
             ..add(
               AutoLoginRequested(),
             ),
+        ),
+        BlocProvider(
+          create: (context) => CartBloc()..add(GetCartById()),
         )
       ],
       child: MaterialApp.router(

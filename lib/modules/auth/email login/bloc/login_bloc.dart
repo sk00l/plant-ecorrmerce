@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_ecommerce/configs/locator/service_locator.dart';
 import 'package:plant_ecommerce/modules/auth/email%20login/repository/email_login_repository.dart';
 
@@ -14,11 +14,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         await emailLoginRepository.signInWithEmailPassword(
             event.email, event.password);
-        if (event.email == null && event.password == null) {
-          emit(const LoginFailed(loginFailedMessage: 'failed'));
-        } else {
-          emit(const LoginSuccess(loginSuccessMessage: 'login success'));
-        }
+        emit(const LoginSuccess(loginSuccessMessage: 'SUCCESS'));
       } catch (e) {
         emit(const LoginFailed(loginFailedMessage: 'failed'));
       }
