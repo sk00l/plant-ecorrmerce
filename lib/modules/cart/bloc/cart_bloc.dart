@@ -17,7 +17,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       try {
         emit(state.copyWith(error: null));
         var currentUser = FirebaseAuth.instance.currentUser!.uid;
-        event.cartModel = event.cartModel.copyWith(postedBy: currentUser);
+        var id = uuid.v4();
+        event.cartModel =
+            event.cartModel.copyWith(postedBy: currentUser, id: id);
         await cartRepository.saveCart(event.cartModel);
       } on FirebaseException catch (e) {
         emit(state.copyWith(error: e.toString()));

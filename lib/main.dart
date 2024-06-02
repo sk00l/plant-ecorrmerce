@@ -9,6 +9,8 @@ import 'package:plant_ecommerce/modules/auth/email%20signup/bloc/signup_bloc.dar
 import 'package:plant_ecommerce/modules/cart/bloc/cart_bloc.dart';
 
 import 'package:plant_ecommerce/modules/plant_add/bloc/plant_bloc.dart';
+import 'package:plant_ecommerce/themes/bloc/theme_bloc.dart';
+import 'package:plant_ecommerce/themes/configs/app_theme.dart';
 
 Future<void> main() async {
   runApp(
@@ -35,6 +37,9 @@ class MainApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+          create: (context) => ThemeBloc(),
+        ),
+        BlocProvider(
           create: (context) => SignupBloc(),
         ),
         BlocProvider(
@@ -53,12 +58,15 @@ class MainApp extends StatelessWidget {
           create: (context) => CartBloc()..add(GetCartById()),
         )
       ],
-      child: MaterialApp.router(
-        theme: ThemeData(
-            fontFamily: 'TT Firs',
-            scaffoldBackgroundColor: const Color.fromARGB(255, 245, 245, 245)),
-        routerConfig: AppRouter.router,
-      ),
+      child: BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+        return MaterialApp.router(
+            routerConfig: AppRouter.router,
+            theme: state is ThemeChanged
+                ? state.themeMode == ThemeMode.dark
+                    ? AppTheme.darkTheme()
+                    : AppTheme.lightTheme()
+                : AppTheme.lightTheme());
+      }),
     );
   }
 }

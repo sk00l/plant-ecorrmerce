@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:plant_ecommerce/configs/extension/build_context_extension.dart';
 import 'package:plant_ecommerce/modules/plant_add/bloc/plant_bloc.dart';
 
 class PlantListViewer extends StatefulWidget {
@@ -14,9 +15,11 @@ class PlantListViewer extends StatefulWidget {
 class _PlantListViewerState extends State<PlantListViewer> {
   @override
   Widget build(BuildContext context) {
+    final appColor = context.appColor;
     return Scaffold(
       body: Center(
-        child: SizedBox(
+        child: Container(
+          color: appColor.primary,
           height: 340, // Adjust the height if needed
           child: BlocBuilder<PlantBloc, PlantState>(
             builder: (context, state) {
@@ -38,7 +41,7 @@ class _PlantListViewerState extends State<PlantListViewer> {
                         child: Container(
                           width: 260,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: appColor.white,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Padding(

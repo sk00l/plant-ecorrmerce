@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:plant_ecommerce/configs/extension/build_context_extension.dart';
 
 class PlantListViewer2 extends StatefulWidget {
   const PlantListViewer2({super.key});
@@ -11,6 +12,7 @@ class PlantListViewer2 extends StatefulWidget {
 class _PlantListViewer2State extends State<PlantListViewer2> {
   @override
   Widget build(BuildContext context) {
+    final appColor = context.appColor;
     return SizedBox(
       height: 300,
       child: ListView.builder(
@@ -34,7 +36,7 @@ class _PlantListViewer2State extends State<PlantListViewer2> {
                         width: 100,
                         height: 100,
                         decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 245, 245, 245),
+                          color: appColor.primary,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: ClipRRect(
