@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -44,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
           AnimatedContainer(
             transform: Matrix4.translationValues(xOffset, yOffset, 0)
               ..scale(isDrawerOpen ? 0.85 : 1.00)
-              ..rotateZ(isDrawerOpen ? -50 : 0),
+              ..rotateZ(isDrawerOpen ? pi * -0.07 : 0),
             duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -84,8 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       : IconButton(
                           onPressed: () {
                             setState(() {
-                              xOffset = 280;
-                              yOffset = 80;
+                              xOffset = 160;
+                              yOffset = 90;
                               isDrawerOpen = true;
                             });
                           },

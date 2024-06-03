@@ -43,6 +43,23 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             cartStateEnum: CartStateEnum.filure, error: e.toString()));
       }
     });
+
+    on<DeleteCart>((event, emit) async {
+      try {
+        // emit(state.copyWith(cartStateEnum: CartStateEnum.loading));
+        await cartRepository.deleteCartById(event.id);
+        final cart = await cartRepository.getCartList();
+        emit(state.copyWith(
+          cartStateEnum: CartStateEnum.success,
+          cartModelList: cart,
+        ));
+      } catch (e) {
+        emit(state.copyWith(
+          cartStateEnum: CartStateEnum.filure,
+          error: e.toString(),
+        ));
+      }
+    });
   }
 
   final CartRepository cartRepository = getIt.get<CartRepository>();

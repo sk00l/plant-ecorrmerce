@@ -42,4 +42,13 @@ class CartRepository {
     }
     return cartList;
   }
+
+  Future<void> deleteCartById(String id) async {
+    try {
+      await _firestore.collection('cart').doc(id).delete();
+      log("cart deleted successfully");
+    } on FirebaseException catch (e) {
+      log(e.toString());
+    }
+  }
 }
