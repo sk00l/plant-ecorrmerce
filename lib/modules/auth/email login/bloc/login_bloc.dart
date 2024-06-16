@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:plant_ecommerce/configs/locator/service_locator.dart';
-import 'package:plant_ecommerce/modules/auth/email%20login/repository/email_login_repository.dart';
+import 'package:plant_ecommerce/configs/di/service_locator.dart';
+import 'package:plant_ecommerce/modules/auth/authentication_repository.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -12,7 +12,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoggingIn());
 
       try {
-        await emailLoginRepository.signInWithEmailPassword(
+        await authenticationRepository.signInWithEmailPassword(
             event.email, event.password);
         emit(const LoginSuccess(loginSuccessMessage: 'SUCCESS'));
       } catch (e) {
@@ -24,7 +24,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoggingIn());
 
       try {
-        final userCredential = await emailLoginRepository.autoLogin();
+        final userCredential = await authenticationRepository.autoLogin();
         if (userCredential.user != null) {
           emit(LoginAuthenticationSuccess());
         } else {
@@ -38,12 +38,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LogoutRequested>((event, emit) async {
       emit(LoggingOut());
 
-      await emailLoginRepository.signOut();
+      await authenticationRepository.signOut();
 
       emit(
           const LogoutSuccess(logoutSuccessMessage: 'logged out successfully'));
     });
   }
 
-  EmailLoginRepository emailLoginRepository = getIt.get<EmailLoginRepository>();
+  AuthenticationRepository authenticationRepository =
+      getIt.get<AuthenticationRepository>();
 }

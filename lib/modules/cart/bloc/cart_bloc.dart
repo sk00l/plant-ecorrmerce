@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:plant_ecommerce/configs/locator/service_locator.dart';
+import 'package:plant_ecommerce/configs/di/service_locator.dart';
 import 'package:plant_ecommerce/models/cart_model.dart';
 import 'package:plant_ecommerce/modules/cart/repository/cart_repository.dart';
 

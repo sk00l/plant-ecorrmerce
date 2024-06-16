@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:plant_ecommerce/configs/locator/service_locator.dart';
+import 'package:plant_ecommerce/configs/di/service_locator.dart';
 import 'package:plant_ecommerce/models/plant_model.dart';
 import 'package:plant_ecommerce/modules/plant_add/repository/plant_add_repository.dart';
 

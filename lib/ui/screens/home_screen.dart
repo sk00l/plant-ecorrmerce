@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:plant_ecommerce/configs/extension/build_context_extension.dart';
-import 'package:plant_ecommerce/configs/locator/service_locator.dart';
+import 'package:plant_ecommerce/configs/di/service_locator.dart';
 import 'package:plant_ecommerce/modules/auth/email%20login/bloc/login_bloc.dart';
 import 'package:plant_ecommerce/modules/auth/email%20login/repository/email_login_repository.dart';
 import 'package:plant_ecommerce/themes/bloc/theme_bloc.dart';
@@ -107,7 +107,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           size: 20,
                         )),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.go('/api');
+                      },
                       icon: const FaIcon(
                         FontAwesomeIcons.bell,
                         size: 20,

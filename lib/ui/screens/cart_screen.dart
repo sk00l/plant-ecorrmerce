@@ -4,6 +4,7 @@ import 'package:cart_stepper/cart_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:plant_ecommerce/configs/extension/build_context_extension.dart';
 import 'package:plant_ecommerce/modules/cart/bloc/cart_bloc.dart';
@@ -305,7 +306,9 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                           const Spacer(),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.go('/cartPage/checkoutPage');
+                            },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),

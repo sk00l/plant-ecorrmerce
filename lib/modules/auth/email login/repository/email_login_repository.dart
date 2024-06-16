@@ -1,9 +1,10 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:plant_ecommerce/modules/auth/authentication_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class EmailLoginRepository {
+class EmailLoginRepository implements AuthenticationRepository {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   // ignore: non_constant_identifier_names
@@ -17,6 +18,7 @@ class EmailLoginRepository {
     pref = await SharedPreferences.getInstance();
   }
 
+  @override
   Future<UserCredential?> signInWithEmailPassword(
     String email,
     String password,
@@ -34,15 +36,16 @@ class EmailLoginRepository {
       log(e.toString());
       rethrow;
     }
-    return null;
   }
 
+  @override
   Future<void> signOut() async {
     await firebaseAuth.signOut();
     await pref?.remove('email');
     await pref?.remove('password');
   }
 
+  @override
   Future<UserCredential> autoLogin() async {
     await _getSharedPreferenceInstance();
     var email = pref?.getString('email');

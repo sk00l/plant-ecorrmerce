@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:plant_ecommerce/configs/locator/service_locator.dart';
+import 'package:plant_ecommerce/configs/di/service_locator.dart';
 import 'package:plant_ecommerce/modules/auth/email%20signup/repository/email_signup_repository.dart';
 
 part 'signup_event.dart';

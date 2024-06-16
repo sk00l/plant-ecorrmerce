@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:plant_ecommerce/configs/locator/service_locator.dart';
+import 'package:plant_ecommerce/configs/di/service_locator.dart';
 import 'package:plant_ecommerce/configs/router/app_router.dart';
 import 'package:plant_ecommerce/firebase_options.dart';
 import 'package:plant_ecommerce/modules/auth/email%20login/bloc/login_bloc.dart';
