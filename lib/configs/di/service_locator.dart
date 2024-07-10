@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:plant_ecommerce/configs/api/api_endpoints.dart';
+import 'package:plant_ecommerce/configs/di/fcm_notification_helper.dart';
 import 'package:plant_ecommerce/modules/auth/authentication_repository.dart';
 import 'package:plant_ecommerce/modules/auth/email%20login/repository/email_login_repository.dart';
 import 'package:plant_ecommerce/modules/auth/email%20signup/repository/email_signup_repository.dart';
@@ -9,9 +10,9 @@ import 'package:plant_ecommerce/modules/plant_add/repository/plant_add_repositor
 import 'package:plant_ecommerce/services/api_services.dart';
 
 final getIt = GetIt.instance;
-// String apiKey = 'HDEV-d94ef62c-33de-47f8-a4f2-c98482ff116b';
 
-void setup() {
+Future<void> setup() async {
+  getIt.registerSingleton<FCMNotificationHelper>(FCMNotificationHelper());
   getIt.registerLazySingleton<EmailSignUpRepository>(
       () => EmailSignUpRepository());
 

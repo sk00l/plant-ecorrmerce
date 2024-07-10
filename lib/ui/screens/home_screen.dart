@@ -207,15 +207,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 const Spacer(),
                                 TextButton(
-                                    onPressed: () {},
-                                    child: const Text(
-                                      'View All',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color:
-                                              Color.fromARGB(255, 75, 142, 75)),
-                                    )),
+                                  onPressed: () {},
+                                  child: const Text(
+                                    'View All',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color:
+                                            Color.fromARGB(255, 75, 142, 75)),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -238,15 +239,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 const Spacer(),
                                 TextButton(
-                                    onPressed: () {},
-                                    child: const Text(
-                                      'View All',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color:
-                                              Color.fromARGB(255, 75, 142, 75)),
-                                    )),
+                                  onPressed: () {},
+                                  child: const Text(
+                                    'View All',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color:
+                                            Color.fromARGB(255, 75, 142, 75)),
+                                  ),
+                                ),
                               ],
                             ),
                           ),

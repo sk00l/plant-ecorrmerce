@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -80,6 +80,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           child: TextFormField(
+            
             focusNode: _focusNode,
             controller: widget.textEditingController,
             autocorrect: false,

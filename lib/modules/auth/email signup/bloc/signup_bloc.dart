@@ -20,5 +20,6 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     });
   }
 
-  EmailSignUpRepository emailSignUpRepository = getIt<EmailSignUpRepository>();
+  EmailSignUpRepository emailSignUpRepository =
+      getIt.get<EmailSignUpRepository>();
 }

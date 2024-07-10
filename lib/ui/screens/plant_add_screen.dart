@@ -58,13 +58,12 @@ class _PlantAddScreenState extends State<PlantAddScreen> {
             TextField(
               controller: sizeController,
               decoration: const InputDecoration(labelText: "Size"),
-              maxLines: null, // Allow multiple lines
+              keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 16.0),
             TextField(
               controller: plantTypeController,
               decoration: const InputDecoration(labelText: "PlantType"),
-              keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 16.0),
             // Plant height field
@@ -74,21 +73,21 @@ class _PlantAddScreenState extends State<PlantAddScreen> {
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 16.0),
-            // Plant humidity field
+
             TextField(
               controller: humudityController,
               decoration: const InputDecoration(labelText: "Humidity (%)"),
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 16.0),
-            // Plant price field
+
             TextField(
               controller: priceController,
               decoration: const InputDecoration(labelText: "Price"),
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 16.0),
-            // Submit button
+
             ElevatedButton(
               onPressed: () {
                 context.read<PlantBloc>().add(

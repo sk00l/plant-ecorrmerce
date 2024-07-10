@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -213,16 +214,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               Center(
                 child: RichText(
-                  text: const TextSpan(
-                    text: "Didn't have an account?",
-                    style: TextStyle(
+                  text: TextSpan(
+                    text: "Already have an account?",
+                    style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: Colors.black),
                     children: <TextSpan>[
                       TextSpan(
-                        text: ' Register',
-                        style: TextStyle(
+                        text: ' Login',
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pop(context);
+                          },
+                        style: const TextStyle(
                           color: Color.fromARGB(255, 75, 142, 75),
                         ),
                       )

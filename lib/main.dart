@@ -1,13 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plant_ecommerce/configs/di/fcm_notification_helper.dart';
 import 'package:plant_ecommerce/configs/di/service_locator.dart';
 import 'package:plant_ecommerce/configs/router/app_router.dart';
 import 'package:plant_ecommerce/firebase_options.dart';
 import 'package:plant_ecommerce/modules/auth/email%20login/bloc/login_bloc.dart';
 import 'package:plant_ecommerce/modules/auth/email%20signup/bloc/signup_bloc.dart';
 import 'package:plant_ecommerce/modules/cart/bloc/cart_bloc.dart';
-
 import 'package:plant_ecommerce/modules/plant_add/bloc/plant_bloc.dart';
 import 'package:plant_ecommerce/themes/bloc/theme_bloc.dart';
 import 'package:plant_ecommerce/themes/configs/app_theme.dart';
@@ -25,7 +25,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  setup();
+  await setup();
+  getIt.get<FCMNotificationHelper>().init();
+  onBgMessage();
   runApp(const MainApp());
 }
 
