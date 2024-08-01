@@ -18,7 +18,7 @@ class EmailLoginRepository implements AuthenticationRepository {
     pref = await SharedPreferences.getInstance();
   }
 
-  @override
+    @override
   Future<UserCredential?> signInWithEmailPassword(
     String email,
     String password,
